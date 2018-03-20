@@ -1,0 +1,47 @@
+<ActionBar title="Menu" class="action-bar">
+    <!--<tk-sidedrawer-getting-started></tk-sidedrawer-getting-started>-->
+</ActionBar>
+<RadSideDrawer #drawerComponent tkToggleNavButton showOverNavigation="true">
+    <ScrollView tkDrawerContent class="sidedrawer-left">
+        <StackLayout horizontalAlign="left">
+            <drawer-content></drawer-content>
+        </StackLayout>
+    </ScrollView>
+    <StackLayout tkMainContent class="page">
+        <ListView [items]="dishes" class="list-group" *ngIf="dishes">
+            <ng-template let-dish="item">
+                <StackLayout orientation="horizontal" class="list-group-item" [nsRouterLink]="['/dishdetail', dish.id]">
+                    <Image row="0" col="0" rowSpan="2" height="108" width="108" [src]="BaseURL + dish.image" class="thumb p-16"></Image>
+                    <GridLayout class="list-group-item" rows="auto *" columns="*">
+                        <Label row="0" col="0" [text]="dish.name" class="list-group-item-heading"></Label>
+                        <Label row="1" col="0" class="list-group-item-text" [text]="dish.description"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+        <ActivityIndicator busy="true" *ngIf="!(dishes || errMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
+        <Label *ngIf="errMess" [text]="'Error: ' + errMess"></Label>
+    </StackLayout>
+</RadSideDrawer>
+<!--<RadSideDrawer tkExampleTitle tkToggleNavButton>
+    <StackLayout tkDrawerContent class="sideStackLayout">
+        <StackLayout class="sideTitleStackLayout">
+            <Label text="Navigation Menu"></Label>
+        </StackLayout>
+        <StackLayout class="sideStackLayout">
+            <Label text="Primary" class="sideLabel sideLightGrayLabel"></Label>
+            <Label text="Social" class="sideLabel"></Label>
+            <Label text="Promotions" class="sideLabel"></Label>
+            <Label text="Labels" class="sideLabel sideLightGrayLabel"></Label>
+            <Label text="Important" class="sideLabel"></Label>
+            <Label text="Starred" class="sideLabel"></Label>
+            <Label text="Sent Mail" class="sideLabel"></Label>
+            <Label text="Drafts" class="sideLabel"></Label>
+        </StackLayout>
+        <Label text="Close Drawer" color="lightgray" padding="10" style="horizontal-align: center" (tap)="onCloseDrawerTap()"></Label>
+    </StackLayout>
+    <StackLayout tkMainContent>
+        <Label [text]="mainContentText" textWrap="true" class="drawerContentText"></Label>
+        <Button text="OPEN DRAWER" (tap)="openDrawer()" class="drawerContentButton"></Button>
+    </StackLayout>
+</RadSideDrawer>-->
